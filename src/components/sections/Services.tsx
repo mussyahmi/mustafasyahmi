@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { sectionCopy, services } from "@/content";
+import { labels, sectionCopy, services } from "@/content";
 import { cn } from "@/lib/utils";
 
 export function Services() {
@@ -30,7 +30,7 @@ export function Services() {
               )}
               <h3 className="text-xl font-bold">{service.name}</h3>
               <p className="mt-2 leading-relaxed text-muted-foreground">{service.summary}</p>
-              <p className="mt-6 text-sm text-muted-foreground">From</p>
+              <p className="mt-6 text-sm text-muted-foreground">{labels.priceFrom}</p>
               <p className="font-heading text-4xl font-extrabold text-primary">
                 {service.price}
                 {service.unit && <span className="text-base font-semibold text-muted-foreground">{service.unit}</span>}
@@ -44,7 +44,7 @@ export function Services() {
                 ))}
               </ul>
               <div className="mt-auto pt-8">
-                <WhatsAppButton className="w-full" message={service.whatsappMessage} label="Ask about this" />
+                <WhatsAppButton className="w-full" message={service.whatsappMessage} label={labels.serviceCta} />
               </div>
             </article>
           ))}

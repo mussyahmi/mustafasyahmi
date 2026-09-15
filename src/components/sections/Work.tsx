@@ -2,7 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/Container";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { SectionHeading } from "@/components/SectionHeading";
-import { sectionCopy, work } from "@/content";
+import { labels, sectionCopy, work } from "@/content";
 
 export function Work() {
   return (
@@ -21,11 +21,11 @@ export function Work() {
                 <p className="text-sm font-semibold text-primary">{item.tagline}</p>
                 <h3 className="mt-1 text-2xl font-bold">{item.name}</h3>
                 <p className="mt-3 leading-relaxed text-muted-foreground">
-                  <span className="font-semibold text-foreground">The problem: </span>
+                  <span className="font-semibold text-foreground">{labels.workProblem}{" "}</span>
                   {item.problem}
                 </p>
                 <p className="mt-2 leading-relaxed text-muted-foreground">
-                  <span className="font-semibold text-foreground">What I built: </span>
+                  <span className="font-semibold text-foreground">{labels.workBuilt}{" "}</span>
                   {item.built}
                 </p>
                 <ul className="mt-4 flex flex-wrap gap-2">
@@ -41,7 +41,7 @@ export function Work() {
                   rel="noopener noreferrer"
                   className="mt-4 inline-flex items-center gap-1 font-semibold text-primary underline-offset-4 hover:underline"
                 >
-                  Open {item.name}
+                  {labels.workOpen} {item.name}
                   <ArrowUpRight className="size-4" aria-hidden />
                 </a>
               </div>

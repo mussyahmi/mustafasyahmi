@@ -254,3 +254,12 @@ export const contact = {
   body: "Send me a WhatsApp message with a short description of what you need. I'll reply with a few questions and an honest view of what it would take.",
   emailLabel: "Prefer email?",
 };
+
+export const labels = {
+  priceFrom: "From",
+  serviceCta: "Ask about this",
+  workProblem: "The problem:",
+  workBuilt: "What I built:",
+  workOpen: "Open",
+  copyright: "© 2026",
+};
