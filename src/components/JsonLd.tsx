@@ -6,7 +6,7 @@ export function JsonLd() {
     "@type": "ProfessionalService",
     name: `${site.name}, Web Developer`,
     url: site.url,
-    image: `${site.url}/og.png`,
+    image: `${site.url}/og.jpg`,
     email: site.email,
     telephone: `+${site.whatsappNumber}`,
     areaServed: { "@type": "Country", name: "Malaysia" },
