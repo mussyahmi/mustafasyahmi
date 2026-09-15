@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mustafa Syahmi, freelance web developer
 
-## Getting Started
+A one page site for a Malaysian freelance web developer, built with Next.js and exported as static files for Firebase Hosting.
 
-First, run the development server:
+## Develop
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Check
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Run these before committing:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm test
+npm run lint
+npm run build
+npm run verify
+```
 
-## Learn More
+`npm run verify` checks the static export in `out/` for the required sections, WhatsApp links, SEO tags and assets.
 
-To learn more about Next.js, take a look at the following resources:
+## Images
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+These scripts need Google Chrome installed at the usual macOS path.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# App screenshots for the work section, also needs cwebp
+npm run screenshots
 
-## Deploy on Vercel
+# Social share image (public/og.jpg)
+bash scripts/make-og.sh
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# App icon and Apple touch icon (src/app/icon.png, src/app/apple-icon.png)
+node scripts/make-icons.mjs
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Editing copy
+
+All visible text lives in `src/content.ts`. Edit it there and the site updates everywhere it is used. A test in `src/content.test.ts` scans every string in that file for dash punctuation and a couple of banned words, so the check will fail if either shows up again.
+
+## Deploy
+
+```bash
+firebase deploy --only hosting
+```
