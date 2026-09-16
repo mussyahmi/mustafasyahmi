@@ -14,7 +14,7 @@ export function Hero() {
           <h1 className="mt-4 text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-6xl">{hero.headline}</h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">{hero.subheadline}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <WhatsAppButton size="lg" message={site.defaultWhatsappMessage} label={hero.primaryCta} />
+            <WhatsAppButton className="hidden md:inline-flex" size="lg" message={site.defaultWhatsappMessage} label={hero.primaryCta} />
             <a
               href="#work"
               className={cn(buttonVariants({ variant: "outline", size: "lg" }), "h-13 rounded-full px-7 text-base")}
