@@ -4,7 +4,7 @@ import { existsSync, readFileSync, statSync } from "node:fs";
 const OUT = "out";
 const SITE_URL = "https://mustafasyahmi.web.app";
 const WHATSAPP_NUMBER = "60193934247";
-const SECTIONS = ["hero", "problems", "services", "work", "process", "about", "faq", "contact"];
+const SECTIONS = ["hero", "problems", "services", "estimate", "work", "process", "about", "faq", "contact"];
 const WORK_IMAGES = ["kirapoket", "marisolat", "kadharilahir", "lukislukis"];
 const MAX_OG_BYTES = 300000;
 const DEFAULT_MESSAGE = "Hi Mustafa, I saw your website and would like to discuss a project.";
@@ -14,6 +14,7 @@ const EXPECTED_WHATSAPP_MESSAGES = [
   "Hi Mustafa, I'm interested in an online store or ordering system.",
   "Hi Mustafa, I'd like to discuss a custom system for my business.",
   "Hi Mustafa, I'm interested in a monthly care plan.",
+  DEFAULT_MESSAGE, // estimator fallback
   DEFAULT_MESSAGE, // contact
   DEFAULT_MESSAGE, // sticky bar
 ];

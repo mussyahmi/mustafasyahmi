@@ -1,6 +1,7 @@
 import { StickyWhatsApp } from "@/components/StickyWhatsApp";
 import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
+import { Estimator } from "@/components/sections/Estimator";
 import { Faq } from "@/components/sections/Faq";
 import { Footer } from "@/components/sections/Footer";
 import { Hero } from "@/components/sections/Hero";
@@ -16,6 +17,7 @@ export default function Home() {
         <Hero />
         <Problems />
         <Services />
+        <Estimator />
         <Work />
         <Process />
         <About />
