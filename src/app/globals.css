@@ -23,6 +23,11 @@
   --ring: #9e1b24;
   --whatsapp: #25d366;
   --whatsapp-foreground: #0b2e17;
+  --ink: #141110;
+  --ink-foreground: #f7f3ee;
+  --ink-muted: #b9aea4;
+  --ink-accent: #e4606a;
+  --ink-border: #2b2320;
 }
 
 @theme inline {
@@ -46,6 +51,12 @@
   --color-ring: var(--ring);
   --color-whatsapp: var(--whatsapp);
   --color-whatsapp-foreground: var(--whatsapp-foreground);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-accent: var(--ink-accent);
+  --color-ink-border: var(--ink-border);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
@@ -76,8 +87,161 @@
   }
 }
 
+@layer components {
+  .glow-crimson {
+    background: radial-gradient(60% 60% at 50% 45%, rgba(158, 27, 36, 0.55) 0%, rgba(158, 27, 36, 0.18) 45%, transparent 72%);
+  }
+
+  .dot-grid {
+    background-image: radial-gradient(rgba(247, 243, 238, 0.14) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .text-gradient-crimson {
+    background: linear-gradient(120deg, #e4606a 0%, #9e1b24 65%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-ember {
+    background: linear-gradient(120deg, #ffb4a8 0%, #e4606a 70%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .card-soft {
+    box-shadow:
+      0 1px 2px rgba(26, 23, 20, 0.04),
+      0 8px 24px -12px rgba(26, 23, 20, 0.18);
+  }
+
+  .card-hover {
+    transition:
+      transform 200ms var(--ease-out-soft),
+      box-shadow 200ms var(--ease-out-soft);
+  }
+
+  @media (hover: hover) {
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 2px 4px rgba(26, 23, 20, 0.05),
+        0 18px 40px -16px rgba(26, 23, 20, 0.28);
+    }
+  }
+}
+
+@layer utilities {
+  /* Reveal state is applied only when scripts run, so a failed or disabled
+     script never hides content. */
+  [data-reveal] {
+    transition:
+      opacity 600ms var(--ease-out-soft),
+      transform 600ms var(--ease-out-soft);
+  }
+
+  .js [data-reveal][data-revealed="false"] {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  .hero-item {
+    animation: hero-in 700ms var(--ease-out-soft) both;
+  }
+
+  .hero-item:nth-child(1) { animation-delay: 60ms; }
+  .hero-item:nth-child(2) { animation-delay: 140ms; }
+  .hero-item:nth-child(3) { animation-delay: 220ms; }
+  .hero-item:nth-child(4) { animation-delay: 300ms; }
+
+  .animate-drift {
+    animation: drift 12s ease-in-out infinite alternate;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite alternate;
+  }
+
+  .faq-body {
+    animation: faq-open 260ms var(--ease-out-soft) both;
+  }
+
+  @supports (animation-timeline: view()) {
+    .tilt-on-scroll {
+      animation: tilt linear both;
+      animation-timeline: view();
+      animation-range: entry 15% cover 65%;
+    }
+  }
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(-3%, -2%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(3%, 2%, 0) scale(1.08);
+  }
+}
+
+@keyframes float {
+  from {
+    transform: translateY(-6px);
+  }
+  to {
+    transform: translateY(6px);
+  }
+}
+
+@keyframes faq-open {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes tilt {
+  from {
+    transform: perspective(1200px) rotateX(6deg) rotateY(-4deg) translateY(10px);
+  }
+  to {
+    transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(-10px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .js [data-reveal][data-revealed="false"] {
+    opacity: 1;
+    transform: none;
   }
 }
