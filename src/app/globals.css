@@ -97,13 +97,6 @@
     background-size: 22px 22px;
   }
 
-  .text-gradient-crimson {
-    background: linear-gradient(120deg, #e4606a 0%, #9e1b24 65%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
   .text-gradient-ember {
     background: linear-gradient(120deg, #ffb4a8 0%, #e4606a 70%);
     -webkit-background-clip: text;
@@ -131,9 +124,40 @@
         0 18px 40px -16px rgba(26, 23, 20, 0.28);
     }
   }
+
+  .edge-crimson {
+    position: relative;
+  }
+
+  .edge-crimson::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, #e4606a 0%, #9e1b24 60%, rgba(158, 27, 36, 0.25) 100%);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
 }
 
 @layer utilities {
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
   /* Reveal state is applied only when scripts run, so a failed or disabled
      script never hides content. */
   [data-reveal] {
@@ -243,5 +267,9 @@
   .js [data-reveal][data-revealed="false"] {
     opacity: 1;
     transform: none;
+  }
+
+  .tilt-on-scroll {
+    animation: none !important;
   }
 }

@@ -20,23 +20,38 @@ export function AppGallery({ name, screens }: Props) {
       aria-label={`${name} screens`}
       tabIndex={0}
       onKeyDown={(event) => {
-        if (event.key === "ArrowRight") go(index + 1);
-        if (event.key === "ArrowLeft") go(index - 1);
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          go(index + 1);
+        }
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          go(index - 1);
+        }
       }}
       onTouchStart={(event) => {
-        if (event.touches.length !== 1) return;
+        if (event.touches.length !== 1) {
+          touchStartX.current = null;
+          return;
+        }
         touchStartX.current = event.touches[0].clientX;
       }}
       onTouchEnd={(event) => {
         const start = touchStartX.current;
         if (start === null) return;
-        if (event.changedTouches.length !== 1) return;
+        if (event.changedTouches.length !== 1) {
+          touchStartX.current = null;
+          return;
+        }
         const delta = event.changedTouches[0].clientX - start;
         if (Math.abs(delta) > 40) go(delta < 0 ? index + 1 : index - 1);
         touchStartX.current = null;
       }}
       className="rounded-[1.1rem] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
     >
+      <p className="sr-only" aria-live="polite">
+        Screen {index + 1} of {screens.length}
+      </p>
       <div className="relative aspect-[390/844] w-full overflow-hidden rounded-[1.1rem]">
         {screens.map((screen, i) => {
           const isNear = Math.abs(i - index) <= 1;
@@ -49,7 +64,7 @@ export function AppGallery({ name, screens }: Props) {
               width={390}
               height={844}
               sizes="14rem"
-              loading={i === 0 ? "eager" : "lazy"}
+              loading="lazy"
               className={`absolute inset-0 size-full object-cover object-top transition-opacity duration-300 ${
                 i === index ? "opacity-100" : "opacity-0"
               }`}
