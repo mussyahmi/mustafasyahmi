@@ -14,7 +14,7 @@ export function Problems() {
               as="article"
               key={problem.title}
               delayMs={i * 60}
-              className="rounded-2xl bg-background p-6 card-soft card-hover"
+              className="rounded-3xl bg-background p-7 card-soft card-hover"
             >
               <span className="font-heading text-sm font-bold text-primary">0{i + 1}</span>
               <h3 className="mt-3 text-xl font-bold">{problem.title}</h3>
