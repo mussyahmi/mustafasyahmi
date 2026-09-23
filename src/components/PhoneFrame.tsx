@@ -13,7 +13,7 @@ export function PhoneFrame({ src, alt, children }: Props) {
           width={390}
           height={844}
           sizes="14rem"
-          className="aspect-[390/844] w-full rounded-[1.1rem] object-cover object-top"
+          className="aspect-[390/560] w-full rounded-[1.1rem] object-cover object-top sm:aspect-[390/844]"
         />
       )}
     </div>

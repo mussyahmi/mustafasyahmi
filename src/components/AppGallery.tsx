@@ -52,7 +52,7 @@ export function AppGallery({ name, screens }: Props) {
       <p className="sr-only" aria-live="polite">
         Screen {index + 1} of {screens.length}
       </p>
-      <div className="relative aspect-[390/844] w-full overflow-hidden rounded-[1.1rem]">
+      <div className="relative aspect-[390/560] w-full overflow-hidden rounded-[1.1rem] sm:aspect-[390/844]">
         {screens.map((screen, i) => {
           const isNear = Math.abs(i - index) <= 1;
           if (!isNear) return null;
