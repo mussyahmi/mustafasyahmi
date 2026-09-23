@@ -22,7 +22,7 @@ export function Work() {
               key={item.name}
               className="grid items-center gap-8 md:grid-cols-2 md:gap-14"
             >
-              <div className={`mx-auto w-full max-w-48 tilt-on-scroll sm:max-w-56 ${i % 2 === 1 ? "md:order-2" : ""}`}>
+              <div className={`mx-auto w-full max-w-56 tilt-on-scroll ${i % 2 === 1 ? "md:order-2" : ""}`}>
                 <PhoneFrame src={item.image} alt={`${item.name} app screenshot`}>
                   {item.screens && item.screens.length > 0 ? (
                     <AppGallery name={item.name} screens={item.screens} />
