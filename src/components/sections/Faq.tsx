@@ -15,7 +15,9 @@ export function Faq() {
                 {faq.question}
                 <Plus className="size-5 shrink-0 text-primary transition group-open:rotate-45" aria-hidden />
               </summary>
-              <p className="mt-3 leading-relaxed text-muted-foreground">{faq.answer}</p>
+              <div className="faq-body">
+                <p className="mt-3 leading-relaxed text-muted-foreground">{faq.answer}</p>
+              </div>
             </details>
           ))}
         </div>

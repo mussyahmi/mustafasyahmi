@@ -1,8 +1,11 @@
 import { Check } from "lucide-react";
 import { Container } from "@/components/Container";
+import { CountUp } from "@/components/CountUp";
+import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { labels, sectionCopy, services } from "@/content";
+import { parseRinggit } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
 export function Services() {
@@ -15,12 +18,14 @@ export function Services() {
           intro={sectionCopy.services.intro}
         />
         <div className="mt-10 grid gap-5 sm:grid-cols-2">
-          {services.map((service) => (
-            <article
+          {services.map((service, i) => (
+            <Reveal
+              as="article"
               key={service.id}
+              delayMs={i * 60}
               className={cn(
-                "flex flex-col rounded-2xl border bg-card p-6 sm:p-8",
-                service.featured && "border-primary ring-1 ring-primary",
+                "flex flex-col rounded-2xl bg-card p-6 card-soft card-hover sm:p-8",
+                service.featured && "ring-2 ring-primary shadow-[0_24px_60px_-28px_rgba(158,27,36,0.65)]",
               )}
             >
               {service.badge && (
@@ -32,7 +37,7 @@ export function Services() {
               <p className="mt-2 leading-relaxed text-muted-foreground">{service.summary}</p>
               <p className="mt-6 text-sm text-muted-foreground">{labels.priceFrom}</p>
               <p className="font-heading text-4xl font-extrabold text-primary">
-                {service.price}
+                <CountUp value={parseRinggit(service.price)} />
                 {service.unit && <span className="text-base font-semibold text-muted-foreground">{service.unit}</span>}
               </p>
               <ul className="mt-6 space-y-2">
@@ -46,7 +51,7 @@ export function Services() {
               <div className="mt-auto pt-8">
                 <WhatsAppButton className="w-full" message={service.whatsappMessage} label={labels.serviceCta} />
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
         <p className="mt-8 max-w-3xl text-sm text-muted-foreground">{sectionCopy.services.note}</p>
