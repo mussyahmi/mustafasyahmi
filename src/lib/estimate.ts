@@ -35,36 +35,44 @@ const STEP = 500;
 const roundDown = (amount: number) => Math.floor(amount / STEP) * STEP;
 const roundUp = (amount: number) => Math.ceil(amount / STEP) * STEP;
 
-export function estimateFor(answers: Answers): Estimate {
-  if (answers.need === "unsure") return { kind: "tiers" };
+export function estimateFor(answers: Partial<Answers>): Estimate {
+  const { need, size, payment, timeline } = answers;
+  if (need === "unsure" || !need || !size || !payment || !timeline) return { kind: "tiers" };
 
-  const base = BASE[answers.need];
-  let amount = base * SIZE_MULTIPLIER[answers.size];
-  if (answers.need === "website" && answers.payment === "yes") amount += PAYMENT_ADDITION;
-  if (answers.timeline === "asap") amount *= RUSH_MULTIPLIER;
+  const base = BASE[need];
+  let amount = base * SIZE_MULTIPLIER[size];
+  if (need === "website" && payment === "yes") amount += PAYMENT_ADDITION;
+  if (timeline === "asap") amount *= RUSH_MULTIPLIER;
 
   const low = Math.max(base, roundDown(amount));
   const high = roundUp(low * SPREAD);
   return { kind: "range", low, high };
 }
 
-function optionLabel(questionId: string, optionId: string): string {
+function optionLabel(questionId: string, optionId: string | undefined): string | undefined {
+  if (!optionId) return undefined;
   const question = estimator.questions.find((item) => item.id === questionId);
   return question?.options.find((option) => option.id === optionId)?.label ?? optionId;
 }
 
-export function estimateMessage(answers: Answers, estimate: Estimate): string {
+export function estimateMessage(answers: Partial<Answers>, estimate: Estimate): string {
   const shown =
     estimate.kind === "range"
       ? `${formatRinggit(estimate.low)} to ${formatRinggit(estimate.high)}`
       : "not sure yet, I would like your advice";
 
-  return [
+  const lines = [
     "Hi Mustafa, I used the estimator on your website.",
-    `What I need: ${optionLabel("need", answers.need)}`,
-    `Size: ${optionLabel("size", answers.size)}`,
-    `Online payment: ${optionLabel("payment", answers.payment)}`,
-    `Timeline: ${optionLabel("timeline", answers.timeline)}`,
+    withLabel("What I need", optionLabel("need", answers.need)),
+    withLabel("Size", optionLabel("size", answers.size)),
+    withLabel("Online payment", optionLabel("payment", answers.payment)),
+    withLabel("Timeline", optionLabel("timeline", answers.timeline)),
     `Estimate shown: ${shown}`,
-  ].join("\n");
+  ];
+
+  return lines.filter((line): line is string => line !== undefined).join("\n");
+}
+
+function withLabel(prefix: string, value: string | undefined): string | undefined {
+  return value === undefined ? undefined : `${prefix}: ${value}`;
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, RotateCcw } from "lucide-react";
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/Reveal";
@@ -11,26 +11,30 @@ import { estimateFor, estimateMessage, type Answers } from "@/lib/estimate";
 import { formatRinggit, parseRinggit } from "@/lib/format";
 import { whatsappLink } from "@/lib/whatsapp";
 
-type PartialAnswers = Partial<Record<keyof Answers, string>>;
-
-const NEED_TO_SERVICE: Record<string, string> = {
-  website: "website",
-  store: "store",
-  custom: "custom",
-};
-
 export function Estimator() {
   const [step, setStep] = useState(0);
-  const [picked, setPicked] = useState<PartialAnswers>({});
+  const [picked, setPicked] = useState<Partial<Answers>>({});
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const isFirstRender = useRef(true);
 
   const questions = estimator.questions;
   const finished = step >= questions.length;
-  const answers = picked as Answers;
-  const result = finished ? estimateFor(answers) : null;
-  const closest = finished ? services.find((service) => service.id === NEED_TO_SERVICE[answers.need]) : undefined;
+  const result = finished ? estimateFor(picked) : null;
+  const closest = finished ? services.find((service) => service.id === picked.need) : undefined;
+
+  // Each question (and the result) unmounts the previously focused button, so
+  // move focus to the new heading instead of letting it fall to document.body.
+  // Skip the very first render so the page does not jump on load.
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    headingRef.current?.focus();
+  }, [step]);
 
   const choose = (questionId: string, optionId: string) => {
-    const next = { ...picked, [questionId]: optionId };
+    const next = { ...picked, [questionId]: optionId } as Partial<Answers>;
     setPicked(next);
     // "Not sure yet" cannot be priced, so skip straight to the result.
     setStep(questionId === "need" && optionId === "unsure" ? questions.length : step + 1);
@@ -48,21 +52,25 @@ export function Estimator() {
         <Reveal className="mt-10 rounded-3xl bg-card p-6 card-soft sm:p-10">
           {!finished && (
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                {estimator.progressLabel} {step + 1} {estimator.progressJoiner} {questions.length}
-              </p>
-              <h3 className="mt-3 text-2xl font-bold sm:text-3xl">{questions[step].label}</h3>
-              <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                {questions[step].options.map((option) => (
-                  <button
-                    key={option.id}
-                    type="button"
-                    onClick={() => choose(questions[step].id, option.id)}
-                    className="rounded-2xl border border-border bg-background px-5 py-4 text-left text-base font-semibold transition hover:border-primary hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-                  >
-                    {option.label}
-                  </button>
-                ))}
+              <div aria-live="polite">
+                <p className="text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                  {estimator.progressLabel} {step + 1} {estimator.progressJoiner} {questions.length}
+                </p>
+                <h3 ref={headingRef} tabIndex={-1} className="mt-3 text-2xl font-bold sm:text-3xl">
+                  {questions[step].label}
+                </h3>
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {questions[step].options.map((option) => (
+                    <button
+                      key={option.id}
+                      type="button"
+                      onClick={() => choose(questions[step].id, option.id)}
+                      className="rounded-2xl border border-border bg-background px-5 py-4 text-left text-base font-semibold transition hover:border-primary hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
               </div>
               {step > 0 && (
                 <button
@@ -118,7 +126,7 @@ export function Estimator() {
               <p className="mt-6 text-sm text-muted-foreground">{estimator.result.note}</p>
 
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <WhatsAppButton size="lg" message={estimateMessage(answers, result)} label={estimator.result.cta} />
+                <WhatsAppButton size="lg" message={estimateMessage(picked, result)} label={estimator.result.cta} />
                 <button
                   type="button"
                   onClick={restart}

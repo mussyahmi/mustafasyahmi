@@ -73,6 +73,10 @@ describe("estimateFor", () => {
   it("shows the tiers instead of a range when the visitor is not sure", () => {
     expect(estimateFor(answers({ need: "unsure" }))).toEqual({ kind: "tiers" });
   });
+
+  it("shows the tiers when the answers are incomplete", () => {
+    expect(estimateFor({ need: "store", size: "medium" })).toEqual({ kind: "tiers" });
+  });
 });
 
 describe("estimateMessage", () => {
@@ -101,5 +105,25 @@ describe("estimateMessage", () => {
   it("contains no dash punctuation", () => {
     const given = answers();
     expect(estimateMessage(given, estimateFor(given))).not.toMatch(/[‒–—―]|\s-\s/);
+  });
+
+  it("omits unanswered questions instead of printing undefined", () => {
+    const given = { need: "unsure" as const };
+    const message = estimateMessage(given, estimateFor(given));
+    expect(message).toBe(
+      [
+        "Hi Mustafa, I used the estimator on your website.",
+        "What I need: Not sure yet",
+        "Estimate shown: not sure yet, I would like your advice",
+      ].join("\n"),
+    );
+  });
+
+  it("never contains the substring undefined", () => {
+    const unsure = { need: "unsure" as const };
+    expect(estimateMessage(unsure, estimateFor(unsure))).not.toContain("undefined");
+
+    const partial = { need: "store" as const, size: "medium" as const };
+    expect(estimateMessage(partial, estimateFor(partial))).not.toContain("undefined");
   });
 });
