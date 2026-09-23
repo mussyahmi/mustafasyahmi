@@ -24,11 +24,13 @@ export function AppGallery({ name, screens }: Props) {
         if (event.key === "ArrowLeft") go(index - 1);
       }}
       onTouchStart={(event) => {
+        if (event.touches.length !== 1) return;
         touchStartX.current = event.touches[0].clientX;
       }}
       onTouchEnd={(event) => {
         const start = touchStartX.current;
         if (start === null) return;
+        if (event.changedTouches.length !== 1) return;
         const delta = event.changedTouches[0].clientX - start;
         if (Math.abs(delta) > 40) go(delta < 0 ? index + 1 : index - 1);
         touchStartX.current = null;
@@ -36,21 +38,25 @@ export function AppGallery({ name, screens }: Props) {
       className="rounded-[1.1rem] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
     >
       <div className="relative aspect-[390/844] w-full overflow-hidden rounded-[1.1rem]">
-        {screens.map((screen, i) => (
-          <Image
-            key={screen.src}
-            src={screen.src}
-            alt={screen.alt}
-            width={390}
-            height={844}
-            sizes="14rem"
-            loading={i === 0 ? "eager" : "lazy"}
-            className={`absolute inset-0 size-full object-cover object-top transition-opacity duration-300 ${
-              i === index ? "opacity-100" : "opacity-0"
-            }`}
-            aria-hidden={i !== index}
-          />
-        ))}
+        {screens.map((screen, i) => {
+          const isNear = Math.abs(i - index) <= 1;
+          if (!isNear) return null;
+          return (
+            <Image
+              key={screen.src}
+              src={screen.src}
+              alt={screen.alt}
+              width={390}
+              height={844}
+              sizes="14rem"
+              loading={i === 0 ? "eager" : "lazy"}
+              className={`absolute inset-0 size-full object-cover object-top transition-opacity duration-300 ${
+                i === index ? "opacity-100" : "opacity-0"
+              }`}
+              aria-hidden={i !== index}
+            />
+          );
+        })}
       </div>
       {screens.length > 1 && (
         <div className="flex items-center justify-center gap-2 bg-foreground py-2">
@@ -61,7 +67,9 @@ export function AppGallery({ name, screens }: Props) {
               onClick={() => go(i)}
               aria-label={`${name} screen ${i + 1} of ${screens.length}`}
               aria-current={i === index}
-              className={`size-2 rounded-full transition ${i === index ? "bg-background" : "bg-background/40"}`}
+              className={`rounded-full transition ${
+                i === index ? "size-2.5 bg-background" : "size-2 bg-background/40"
+              }`}
             />
           ))}
         </div>
