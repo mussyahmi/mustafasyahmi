@@ -43,7 +43,7 @@ export function Hero() {
               href="#work"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
-                "h-13 rounded-full border-ink-border bg-transparent px-7 text-base text-ink-foreground hover:bg-white/10 hover:text-ink-foreground",
+                "h-13 rounded-full border-ink-border bg-transparent px-7 text-base text-ink-foreground hover:bg-white/10 hover:text-ink-foreground focus-visible:outline-offset-2 focus-visible:[outline:2px_solid_var(--ink-accent)]",
               )}
             >
               {hero.secondaryCta}
