@@ -25,7 +25,7 @@ export function Hero() {
         className="pointer-events-none absolute -top-24 right-[-10%] h-[36rem] w-[36rem] glow-crimson animate-drift blur-2xl"
         aria-hidden
       />
-      <Container className="relative grid items-center gap-8 pb-20 pt-12 sm:pb-28 sm:pt-20 md:grid-cols-[1.15fr_0.85fr] md:gap-14">
+      <Container className="relative grid items-center gap-8 pb-20 pt-8 sm:pb-28 sm:pt-20 md:grid-cols-[1.15fr_0.85fr] md:gap-14">
         <div className="order-2 md:order-1">
           <p className="hero-item text-sm font-semibold uppercase tracking-[0.14em] text-ink-accent">{hero.eyebrow}</p>
           <h1 className="hero-item mt-4 text-[clamp(2.5rem,7vw,4.5rem)] font-extrabold leading-[1.05]">
@@ -37,7 +37,6 @@ export function Hero() {
               size="lg"
               message={site.defaultWhatsappMessage}
               label={hero.primaryCta}
-              className="hidden md:inline-flex"
             />
             <a
               href="#work"
@@ -51,7 +50,7 @@ export function Hero() {
           </div>
         </div>
         <div className="order-1 md:order-2">
-          <div className="relative mx-auto w-full max-w-72 sm:max-w-sm md:max-w-none">
+          <div className="relative mx-auto w-full max-w-56 sm:max-w-sm md:max-w-none">
             <div className="pointer-events-none absolute -inset-6 glow-crimson blur-xl" aria-hidden />
             <Image
               src="/mustafa.webp"

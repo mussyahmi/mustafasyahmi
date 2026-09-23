@@ -1,4 +1,3 @@
-import { StickyWhatsApp } from "@/components/StickyWhatsApp";
 import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
 import { Estimator } from "@/components/sections/Estimator";
@@ -25,7 +24,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-      <StickyWhatsApp />
     </>
   );
 }

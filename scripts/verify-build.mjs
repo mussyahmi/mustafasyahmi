@@ -16,7 +16,6 @@ const EXPECTED_WHATSAPP_MESSAGES = [
   "Hi Mustafa, I'm interested in a monthly care plan.",
   DEFAULT_MESSAGE, // estimator fallback
   DEFAULT_MESSAGE, // contact
-  DEFAULT_MESSAGE, // sticky bar
 ];
 
 const failures = [];
