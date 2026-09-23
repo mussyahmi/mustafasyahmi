@@ -135,14 +135,8 @@ export function Estimator() {
 
               <p className="mt-6 text-sm text-muted-foreground">{estimator.result.note}</p>
 
-              <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:items-center">
-                <WhatsAppButton
-                  size="lg"
-                  variant="primary"
-                  className="w-full sm:w-auto"
-                  message={estimateMessage(picked, result)}
-                  label={estimator.result.cta}
-                />
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <WhatsAppButton size="lg" message={estimateMessage(picked, result)} label={estimator.result.cta} />
                 <button
                   type="button"
                   onClick={restart}
