@@ -28,7 +28,7 @@ export function Hero() {
       <Container className="relative grid items-center gap-8 pb-20 pt-12 sm:pb-28 sm:pt-20 md:grid-cols-[1.15fr_0.85fr] md:gap-14">
         <div className="order-2 md:order-1">
           <p className="hero-item text-sm font-semibold uppercase tracking-[0.14em] text-ink-accent">{hero.eyebrow}</p>
-          <h1 className="hero-item mt-4 text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-6xl">
+          <h1 className="hero-item mt-4 text-[clamp(2.5rem,7vw,4.5rem)] font-extrabold leading-[1.05]">
             <Headline />
           </h1>
           <p className="hero-item mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">{hero.subheadline}</p>
@@ -43,7 +43,7 @@ export function Hero() {
               href="#work"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
-                "h-13 rounded-full border-ink-border bg-transparent px-7 text-base text-ink-foreground hover:bg-white/10 hover:text-ink-foreground focus-visible:outline-offset-2 focus-visible:[outline:2px_solid_var(--ink-accent)]",
+                "h-13 rounded-full border-ink-muted/50 bg-transparent px-7 text-base text-ink-foreground hover:bg-white/10 hover:text-ink-foreground focus-visible:outline-offset-2 focus-visible:[outline:2px_solid_var(--ink-accent)]",
               )}
             >
               {hero.secondaryCta}
