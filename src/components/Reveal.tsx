@@ -9,6 +9,12 @@ type Props = {
   delayMs?: number;
 };
 
+// Marks that the bundle which can reveal content has actually loaded. Hiding
+// is gated on this class, so a failed or slow bundle leaves content visible.
+if (typeof document !== "undefined") {
+  document.documentElement.classList.add("js");
+}
+
 export function Reveal({ children, as: Tag = "div", className, delayMs = 0 }: Props) {
   const ref = useRef<HTMLElement>(null);
   const [revealed, setRevealed] = useState(false);
