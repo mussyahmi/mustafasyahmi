@@ -20,6 +20,7 @@ export type WorkItem = {
   problem: string;
   built: string;
   stack: string[];
+  screens?: { src: string; alt: string }[];
 };
 
 export type Step = { title: string; body: string };
