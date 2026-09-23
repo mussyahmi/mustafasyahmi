@@ -17,7 +17,13 @@ export function Contact() {
             <h2 className="max-w-2xl text-3xl font-bold sm:text-5xl">{contact.heading}</h2>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-ink-muted">{contact.body}</p>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-              <WhatsAppButton size="lg" message={site.defaultWhatsappMessage} label={hero.primaryCta} />
+              <WhatsAppButton
+                size="lg"
+                variant="onDark"
+                className="w-full sm:w-auto"
+                message={site.defaultWhatsappMessage}
+                label={hero.primaryCta}
+              />
               <p className="text-ink-muted">
                 {contact.emailLabel}{" "}
                 <a
