@@ -263,3 +263,65 @@ export const labels = {
   workOpen: "Open",
   copyright: "© 2026",
 };
+
+export type EstimatorOption = { id: string; label: string };
+
+export type EstimatorQuestion = { id: "need" | "size" | "payment" | "timeline"; label: string; options: EstimatorOption[] };
+
+export const estimator = {
+  eyebrow: "Quick estimate",
+  heading: "What would your project cost?",
+  intro:
+    "Four quick questions and you get a range in about 20 seconds. You can send your answers straight to me on WhatsApp.",
+  questions: [
+    {
+      id: "need",
+      label: "What do you need?",
+      options: [
+        { id: "website", label: "Business website" },
+        { id: "store", label: "Online store or ordering system" },
+        { id: "custom", label: "Custom system for my business" },
+        { id: "unsure", label: "Not sure yet" },
+      ],
+    },
+    {
+      id: "size",
+      label: "Roughly how big is it?",
+      options: [
+        { id: "small", label: "Up to 10 pages or products" },
+        { id: "medium", label: "10 to 50 pages or products" },
+        { id: "large", label: "More than 50 pages or products" },
+      ],
+    },
+    {
+      id: "payment",
+      label: "Do you need to take payments online?",
+      options: [
+        { id: "yes", label: "Yes" },
+        { id: "no", label: "No" },
+        { id: "unsure", label: "Not sure" },
+      ],
+    },
+    {
+      id: "timeline",
+      label: "When do you want it live?",
+      options: [
+        { id: "asap", label: "As soon as possible" },
+        { id: "soon", label: "In the next 1 to 3 months" },
+        { id: "exploring", label: "Just exploring for now" },
+      ],
+    },
+  ] as EstimatorQuestion[],
+  result: {
+    rangeTitle: "Your estimated range",
+    tiersTitle: "Here is where my prices start",
+    note: "This is an estimate, not a quote. Your real price comes after a free chat and a written proposal.",
+    includesLabel: "Closest package",
+    cta: "Send my answers on WhatsApp",
+    restart: "Start again",
+    back: "Back",
+  },
+  fallbackCta: "Rather just ask? Message me on WhatsApp",
+  progressLabel: "Question",
+  progressJoiner: "of",
+};
