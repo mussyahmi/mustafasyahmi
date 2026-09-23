@@ -15,6 +15,7 @@ export function Estimator() {
   const [step, setStep] = useState(0);
   const [picked, setPicked] = useState<Partial<Answers>>({});
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const resultHeadingRef = useRef<HTMLHeadingElement>(null);
   const isFirstRender = useRef(true);
 
   const questions = estimator.questions;
@@ -23,18 +24,24 @@ export function Estimator() {
   const closest = finished ? services.find((service) => service.id === picked.need) : undefined;
 
   // Each question (and the result) unmounts the previously focused button, so
-  // move focus to the new heading instead of letting it fall to document.body.
-  // Skip the very first render so the page does not jump on load.
+  // move focus to whichever heading is currently mounted instead of letting
+  // it fall to document.body. Skip the very first render so the page does
+  // not jump on load.
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
-    headingRef.current?.focus();
-  }, [step]);
+    (finished ? resultHeadingRef.current : headingRef.current)?.focus();
+  }, [step, finished]);
 
   const choose = (questionId: string, optionId: string) => {
-    const next = { ...picked, [questionId]: optionId } as Partial<Answers>;
+    // Changing the first question starts a new path, so drop any answers
+    // gathered under the previous path rather than mixing them together.
+    const next: Partial<Answers> =
+      questionId === "need"
+        ? { need: optionId as Answers["need"] }
+        : ({ ...picked, [questionId]: optionId } as Partial<Answers>);
     setPicked(next);
     // "Not sure yet" cannot be priced, so skip straight to the result.
     setStep(questionId === "need" && optionId === "unsure" ? questions.length : step + 1);
@@ -49,7 +56,7 @@ export function Estimator() {
     <section id="estimate" className="py-16 sm:py-24">
       <Container>
         <SectionHeading eyebrow={estimator.eyebrow} heading={estimator.heading} intro={estimator.intro} />
-        <Reveal className="mt-10 rounded-3xl bg-card p-6 card-soft sm:p-10">
+        <Reveal className="mt-10 rounded-3xl bg-card p-7 card-soft sm:p-10">
           {!finished && (
             <div>
               <div aria-live="polite">
@@ -86,7 +93,10 @@ export function Estimator() {
           )}
 
           {finished && result && (
-            <div>
+            <div aria-live="polite">
+              <h3 ref={resultHeadingRef} tabIndex={-1} className="sr-only">
+                {result.kind === "range" ? estimator.result.rangeTitle : estimator.result.tiersTitle}
+              </h3>
               {result.kind === "range" ? (
                 <>
                   <p className="text-sm font-semibold uppercase tracking-[0.14em] text-primary">
