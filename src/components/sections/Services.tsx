@@ -49,7 +49,12 @@ export function Services() {
                 ))}
               </ul>
               <div className="mt-auto pt-8">
-                <WhatsAppButton className="w-full" message={service.whatsappMessage} label={labels.serviceCta} />
+                <WhatsAppButton
+                  className="w-full"
+                  variant="outline"
+                  message={service.whatsappMessage}
+                  label={labels.serviceCta}
+                />
               </div>
             </Reveal>
           ))}
