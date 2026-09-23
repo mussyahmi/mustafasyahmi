@@ -452,7 +452,7 @@ export function CountUp({ value, className, durationMs = 900 }: Props) {
 - [ ] **Step 10: Verify the foundation builds**
 
 Run: `npm test && npm run lint && npm run build && npm run verify`
-Expected: 16 tests pass, lint clean, build clean, verify still prints `PASS: 8 sections, 7 WhatsApp links, SEO tags and assets present` (nothing uses the new pieces yet).
+Expected: 15 tests pass, lint clean, build clean, verify still prints `PASS: 8 sections, 7 WhatsApp links, SEO tags and assets present` (nothing uses the new pieces yet).
 
 - [ ] **Step 11: Commit**
 
