@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import * as content from "./content";
+import { formatRinggit, parseRinggit } from "@/lib/format";
 
 type Found = { path: string; text: string };
 
@@ -72,5 +73,13 @@ describe("section sizes", () => {
     expect(content.problems).toHaveLength(3);
     expect(content.processSteps).toHaveLength(4);
     expect(content.faqs).toHaveLength(6);
+  });
+});
+
+describe("prices survive the format round trip", () => {
+  it("renders every service price exactly as written", () => {
+    for (const service of content.services) {
+      expect(formatRinggit(parseRinggit(service.price))).toBe(service.price);
+    }
   });
 });
