@@ -172,6 +172,11 @@ export const work: WorkItem[] = [
     built:
       "One app that detects your zone automatically, shows the prayer times for it, points to the Qibla on a map and tracks qada prayers.",
     stack: ["Next.js", "Firebase", "Leaflet maps"],
+    screens: [
+      { src: "/work/marisolat/1.webp", alt: "MariSolat home screen with today's prayer times for Kuala Lumpur" },
+      { src: "/work/marisolat/2.webp", alt: "MariSolat Qibla direction screen showing 293 degrees and a compass" },
+      { src: "/work/marisolat/3.webp", alt: "MariSolat countdown to the last third of the night" },
+    ],
   },
   {
     name: "KadHariLahir",
