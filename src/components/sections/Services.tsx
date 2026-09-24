@@ -24,8 +24,10 @@ export function Services() {
               key={service.id}
               delayMs={i * 60}
               className={cn(
-                "flex flex-col rounded-3xl bg-card p-7 card-soft card-hover sm:p-9",
-                service.featured && "edge-crimson shadow-[0_24px_60px_-28px_rgba(158,27,36,0.65)]",
+                "flex flex-col rounded-3xl bg-card p-7 sm:p-9",
+                service.featured
+                  ? "edge-crimson shadow-[0_24px_60px_-28px_rgba(158,27,36,0.65)]"
+                  : "border border-border",
               )}
             >
               {service.badge && (

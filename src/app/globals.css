@@ -97,12 +97,6 @@
     background-size: 22px 22px;
   }
 
-  .text-gradient-ember {
-    background: linear-gradient(120deg, #ffb4a8 0%, #e4606a 70%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
 
   .card-soft {
     box-shadow:

@@ -43,7 +43,6 @@ export const site = {
 export const hero = {
   eyebrow: "Freelance web developer in Malaysia",
   headline: "I build websites and ordering systems for Malaysian businesses.",
-  headlineHighlight: "ordering systems",
   subheadline:
     "I'm Mustafa, a senior software engineer with five and a half years building payment and financial systems. I help business owners stop juggling WhatsApp orders and spreadsheets, and start selling online properly.",
   primaryCta: "WhatsApp me",

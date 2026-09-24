@@ -5,18 +5,6 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { hero, site } from "@/content";
 import { cn } from "@/lib/utils";
 
-function Headline() {
-  const [before, after] = hero.headline.split(hero.headlineHighlight);
-  if (after === undefined) return <>{hero.headline}</>;
-  return (
-    <>
-      {before}
-      <span className="text-gradient-ember">{hero.headlineHighlight}</span>
-      {after}
-    </>
-  );
-}
-
 export function Hero() {
   return (
     <section id="hero" className="relative overflow-hidden bg-ink text-ink-foreground">
@@ -29,7 +17,7 @@ export function Hero() {
         <div className="order-2 md:order-1">
           <p className="hero-item text-sm font-semibold uppercase tracking-[0.14em] text-ink-accent">{hero.eyebrow}</p>
           <h1 className="hero-item mt-4 text-[clamp(2.5rem,7vw,4.5rem)] font-extrabold leading-[1.05]">
-            <Headline />
+            {hero.headline}
           </h1>
           <p className="hero-item mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">{hero.subheadline}</p>
           <div className="hero-item mt-8 flex flex-wrap gap-3">
