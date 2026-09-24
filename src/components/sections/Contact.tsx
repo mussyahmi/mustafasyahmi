@@ -22,7 +22,7 @@ export function Contact() {
                 {contact.emailLabel}{" "}
                 <a
                   href={`mailto:${site.email}`}
-                  className="font-semibold text-ink-foreground underline underline-offset-4"
+                  className="inline-block py-2 font-semibold text-ink-foreground underline underline-offset-4"
                 >
                   {site.email}
                 </a>

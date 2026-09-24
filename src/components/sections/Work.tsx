@@ -20,17 +20,23 @@ export function Work() {
             <Reveal
               as="article"
               key={item.name}
-              className="grid items-center gap-8 md:grid-cols-2 md:gap-14"
+              className={`grid items-center gap-8 md:gap-12 ${
+                i % 2 === 1 ? "md:grid-cols-[1fr_16rem]" : "md:grid-cols-[16rem_1fr]"
+              }`}
             >
-              <div className={`mx-auto w-full max-w-56 tilt-on-scroll ${i % 2 === 1 ? "md:order-2" : ""}`}>
+              <div
+                className={`mx-auto w-full max-w-56 tilt-on-scroll md:mx-0 md:max-w-none ${
+                  i % 2 === 1 ? "md:order-2" : ""
+                }`}
+              >
                 <PhoneFrame src={item.image} alt={`${item.name} app screenshot`}>
                   {item.screens && item.screens.length > 0 ? (
                     <AppGallery name={item.name} screens={item.screens} />
                   ) : undefined}
                 </PhoneFrame>
               </div>
-              <div className={i % 2 === 1 ? "md:order-1" : ""}>
-                <p className="text-sm font-semibold uppercase tracking-[0.14em] text-primary">{item.tagline}</p>
+              <div className={`md:max-w-xl ${i % 2 === 1 ? "md:order-1 md:justify-self-end" : ""}`}>
+                <p className="text-sm font-semibold text-primary">{item.tagline}</p>
                 <h3 className="mt-2 text-3xl font-bold">{item.name}</h3>
                 <p className="mt-4 leading-relaxed text-muted-foreground">
                   <span className="font-semibold text-foreground">{labels.workProblem} </span>
@@ -51,7 +57,7 @@ export function Work() {
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-1 font-semibold text-primary underline-offset-4 hover:underline"
+                  className="mt-4 inline-flex min-h-11 items-center gap-1 font-semibold text-primary underline-offset-4 hover:underline"
                 >
                   {labels.workOpen} {item.name}
                   <ArrowUpRight className="size-4" aria-hidden />

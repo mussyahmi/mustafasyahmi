@@ -7,7 +7,7 @@ export function Process() {
   return (
     <section id="process" className="py-16 sm:py-24">
       <Container>
-        <SectionHeading eyebrow={sectionCopy.process.eyebrow} heading={sectionCopy.process.heading} />
+        <SectionHeading heading={sectionCopy.process.heading} />
         <div className="relative mt-12">
           <span
             className="pointer-events-none absolute left-5 top-5 hidden h-px w-[calc(100%-2.5rem)] bg-gradient-to-r from-primary/60 to-primary/10 lg:block"

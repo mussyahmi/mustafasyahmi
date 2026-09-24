@@ -16,7 +16,7 @@ export function About() {
             href={site.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 font-semibold text-primary underline-offset-4 hover:underline"
+            className="inline-flex min-h-11 items-center gap-1 font-semibold text-primary underline-offset-4 hover:underline"
           >
             {about.githubLabel}
             <ArrowUpRight className="size-4" aria-hidden />

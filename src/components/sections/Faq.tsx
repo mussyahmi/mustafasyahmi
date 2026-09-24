@@ -7,7 +7,7 @@ export function Faq() {
   return (
     <section id="faq" className="py-16 sm:py-24">
       <Container className="max-w-3xl">
-        <SectionHeading eyebrow={sectionCopy.faq.eyebrow} heading={sectionCopy.faq.heading} />
+        <SectionHeading heading={sectionCopy.faq.heading} />
         <div className="mt-8 divide-y border-y">
           {faqs.map((faq) => (
             <details key={faq.question} className="group py-5">
@@ -16,7 +16,7 @@ export function Faq() {
                 <Plus className="size-5 shrink-0 text-primary transition group-open:rotate-45" aria-hidden />
               </summary>
               <div className="faq-body">
-                <p className="mt-3 leading-relaxed text-muted-foreground">{faq.answer}</p>
+                <p className="mt-3 max-w-[62ch] leading-relaxed text-muted-foreground">{faq.answer}</p>
               </div>
             </details>
           ))}

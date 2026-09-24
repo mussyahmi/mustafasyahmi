@@ -55,7 +55,7 @@ export function Estimator() {
   return (
     <section id="estimate" className="py-16 sm:py-24">
       <Container>
-        <SectionHeading eyebrow={estimator.eyebrow} heading={estimator.heading} intro={estimator.intro} />
+        <SectionHeading heading={estimator.heading} intro={estimator.intro} />
         <Reveal className="mt-10 rounded-3xl bg-card p-7 card-soft sm:p-10">
           {!finished && (
             <div>
@@ -155,7 +155,7 @@ export function Estimator() {
                 href={whatsappLink(site.defaultWhatsappMessage)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-primary underline-offset-4 hover:underline"
+                className="inline-flex min-h-11 items-center font-semibold text-primary underline-offset-4 hover:underline"
               >
                 {estimator.fallbackCta}
               </a>
