@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     locale: "en_MY",
     images: [{ url: "/og.jpg", width: 1200, height: 630, alt: site.title }],
   },
-  verification: { google: "AGi57iptlRRyaYjHcND63VXEtvUH9stG9bwxyZBT6t0" },
+  verification: { google: "EmhCQrx8r9zCv013IbnCXYVJ6Jhh2R4aIOum8xQFKvA" },
   twitter: {
     card: "summary_large_image",
     title: site.title,
