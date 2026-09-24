@@ -30,13 +30,15 @@ export function Services() {
                   : "border border-border",
               )}
             >
-              {service.badge && (
-                <p className="mb-3 w-fit rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground">
-                  {service.badge}
-                </p>
-              )}
+              <div className="mb-3 flex h-6 items-center">
+                {service.badge && (
+                  <p className="w-fit rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground">
+                    {service.badge}
+                  </p>
+                )}
+              </div>
               <h3 className="text-xl font-bold">{service.name}</h3>
-              <p className="mt-2 leading-relaxed text-muted-foreground">{service.summary}</p>
+              <p className="mt-2 leading-relaxed text-muted-foreground sm:min-h-[3.25rem]">{service.summary}</p>
               <p className="mt-6 text-sm text-muted-foreground">{labels.priceFrom}</p>
               <p className="font-heading text-4xl font-extrabold text-primary">
                 <CountUp value={parseRinggit(service.price)} />

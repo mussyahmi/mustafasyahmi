@@ -6,7 +6,8 @@ import { faqs, sectionCopy } from "@/content";
 export function Faq() {
   return (
     <section id="faq" className="py-16 sm:py-24">
-      <Container className="max-w-3xl">
+      <Container>
+        <div className="max-w-3xl">
         <SectionHeading heading={sectionCopy.faq.heading} />
         <div className="mt-8 divide-y border-y">
           {faqs.map((faq) => (
@@ -20,6 +21,7 @@ export function Faq() {
               </div>
             </details>
           ))}
+          </div>
         </div>
       </Container>
     </section>
