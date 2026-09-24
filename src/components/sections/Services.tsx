@@ -30,7 +30,14 @@ export function Services() {
                   : "border border-border",
               )}
             >
-              <div className="mb-3 flex h-6 items-center">
+              <div
+                className={cn(
+                  // Reserved only where cards sit side by side, so prices line
+                  // up across a row without costing blank space on a phone.
+                  "mb-3 items-center sm:flex sm:h-6",
+                  service.badge ? "flex h-6" : "hidden",
+                )}
+              >
                 {service.badge && (
                   <p className="w-fit rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground">
                     {service.badge}
