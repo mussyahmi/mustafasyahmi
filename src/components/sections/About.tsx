@@ -6,9 +6,9 @@ import { about, site } from "@/content";
 export function About() {
   return (
     <section id="about" className="border-y bg-card py-16 sm:py-24">
-      <Container className="grid gap-6 md:grid-cols-[0.8fr_1.2fr] md:gap-14">
-        <h2 className="text-3xl font-bold sm:text-4xl">{about.heading}</h2>
-        <Reveal delayMs={80} className="space-y-4 text-lg leading-relaxed text-muted-foreground">
+      <Container>
+        <h2 className="text-3xl font-bold leading-[1.1] sm:text-4xl lg:text-5xl">{about.heading}</h2>
+        <Reveal delayMs={80} className="mt-6 max-w-2xl space-y-4 text-lg leading-relaxed text-muted-foreground">
           {about.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
