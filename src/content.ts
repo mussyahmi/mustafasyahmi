@@ -157,6 +157,11 @@ export const work: WorkItem[] = [
     built:
       "An installable expense tracker built around your salary cycle, with needs, wants and savings budgets, debt tracking and daily spending limits.",
     stack: ["Next.js", "Firebase", "PWA"],
+    screens: [
+      { src: "/work/kirapoket/1.webp", alt: "KiraPoket home screen showing what is left in the salary cycle" },
+      { src: "/work/kirapoket/2.webp", alt: "KiraPoket budgets by category, with one category over budget" },
+      { src: "/work/kirapoket/3.webp", alt: "KiraPoket new transaction screen showing the balance after the expense" },
+    ],
   },
   {
     name: "MariSolat",
